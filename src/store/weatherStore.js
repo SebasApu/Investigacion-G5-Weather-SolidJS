@@ -1,7 +1,7 @@
 import { createSignal, createResource } from 'solid-js';
 import { fetchWeather } from '../services/weatherApi';
 
-const [city, setCity] = createSignal('');
+const [city, setCity] = createSignal('Liberia');
 
 // createResource observa `city` reactivamente:
 // - city vacío ('') es falsy → no hace fetch
