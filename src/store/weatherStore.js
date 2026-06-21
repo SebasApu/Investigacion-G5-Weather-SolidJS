@@ -13,5 +13,11 @@ export const [weather] = createResource(city, fetchWeather);
 export const [history, setHistory] = createSignal([]);
 
 export function searchCity(newCity) {
-  if (newCity.trim()) setCity(newCity.trim());
+  const trimmed = newCity.trim();
+  if (!trimmed) return;
+  setCity(trimmed);
+  setHistory(prev => {
+    const filtered = prev.filter(c => c.toLowerCase() !== trimmed.toLowerCase());
+    return [trimmed, ...filtered].slice(0, 5);
+  });
 }

@@ -8,7 +8,7 @@ export default function WeatherCard() {
       
       <Show when={weather.loading}>
         <div class="status-message loading-message">
-          Buscando el clima...
+          <div class="spinner" />
         </div>
       </Show>
 

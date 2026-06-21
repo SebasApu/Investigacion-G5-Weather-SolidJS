@@ -1,4 +1,5 @@
 import SearchBar from './components/SearchBar';
+import SearchHistory from './components/SearchHistory';
 import WeatherCard from './components/WeatherCard';
 
 export default function App() {
@@ -6,6 +7,7 @@ export default function App() {
     <div class="app">
       <h1 class="app-title">App del Clima</h1>
       <SearchBar />
+      <SearchHistory />
       <WeatherCard />
     </div>
   );
