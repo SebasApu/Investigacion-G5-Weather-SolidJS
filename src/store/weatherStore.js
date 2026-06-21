@@ -1,5 +1,7 @@
-import { createSignal, createResource } from 'solid-js';
+import { createSignal, createResource, createEffect } from 'solid-js';
 import { fetchWeather } from '../services/weatherApi';
+
+const HISTORY_KEY = 'weather_history';
 
 const [city, setCity] = createSignal('Liberia');
 
@@ -9,8 +11,26 @@ const [city, setCity] = createSignal('Liberia');
 // - weather.loading y weather.error son reactivos automáticamente
 export const [weather] = createResource(city, fetchWeather);
 
-// Para los compañeros: historial (Kristin) y setHistory exportados
-export const [history, setHistory] = createSignal([]);
+function loadHistory() {
+  try {
+    const stored = localStorage.getItem(HISTORY_KEY);
+    const parsed = stored ? JSON.parse(stored) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+// Para los compañeros: historial y setHistory exportados
+export const [history, setHistory] = createSignal(loadHistory());
+
+// Persiste el historial en localStorage cada vez que cambia (reactivo)
+createEffect(() => {
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history()));
+  } catch {
+  }
+});
 
 export function searchCity(newCity) {
   const trimmed = newCity.trim();
