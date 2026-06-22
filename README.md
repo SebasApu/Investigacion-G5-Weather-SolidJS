@@ -1,7 +1,7 @@
 # App del Clima - G5 SolidJS
 
 ## Framework
-SolidJS v1.8 con Vite
+SolidJS v1.8 con Vite · Íconos: lucide-solid
 
 ## Setup local
 
@@ -20,6 +20,8 @@ npm run dev
 ## Conceptos clave de SolidJS
 - `createSignal`: estado reactivo primitivo (equivalente a useState en React)
 - `createResource`: fetching de datos asíncrono con estados loading/error automáticos
+- `createEffect`: efectos secundarios reactivos (sincronización con localStorage)
+- `Switch/Match`: estados mutuamente excluyentes (loading → error → datos)
 - `Show`: renderizado condicional declarativo
 - `For`: renderizado de listas reactivas
 - Sin Virtual DOM: SolidJS actualiza el DOM real directamente
