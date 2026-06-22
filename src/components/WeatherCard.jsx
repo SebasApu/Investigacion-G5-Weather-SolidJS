@@ -36,20 +36,32 @@ const formatTime = (timestamp) => {
 export default function WeatherCard() {
   return (
     <div class="weather-wrapper">
+      {/*
+        Switch/Match es el patrón de SolidJS para estados mutuamente excluyentes.
+        Evalúa cada Match en orden y muestra SOLO el primero que sea verdadero.
+        Esto garantiza que nunca se muestren dos estados al mismo tiempo.
+      */}
       <Switch>
 
+        {/* ESTADO 1: Mientras el fetch está en progreso, weather.loading es true */}
         <Match when={weather.loading}>
           <div class="status-message loading-message">
             <div class="spinner" />
           </div>
         </Match>
 
+        {/* ESTADO 2: Si fetchWeather lanzó un error, weather.error contiene el objeto Error */}
         <Match when={weather.error}>
           <div class="status-message error-message">
             ⚠️ {weather.error?.message || "Fallo de red: Verifica tu conexión a internet."}
           </div>
         </Match>
 
+        {/*
+          ESTADO 3: Si hay datos, weather() retorna el objeto JSON de OpenWeatherMap.
+          `keyed` le dice a SolidJS que data es el valor directamente (no un accessor),
+          garantizando que no es null ni undefined dentro de esta función.
+        */}
         <Match when={weather()} keyed>
           {(data) => {
             const description = capitalize(data.weather[0].description);
