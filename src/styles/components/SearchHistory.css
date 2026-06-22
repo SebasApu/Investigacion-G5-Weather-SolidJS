@@ -51,10 +51,46 @@
   background: rgba(255, 199, 44, 0.13);
 }
 
+
 @media (max-width: 620px) {
   .history-container {
     align-items: flex-start;
     flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .history-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+  }
+
+  .history-chips {
+    width: 100%;
     gap: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .history-container {
+    margin-top: 20px;
+    padding: 14px;
+    gap: 10px;
+    border-radius: 16px;
+  }
+
+  .history-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+  }
+
+  .history-chips {
+    gap: 8px;
+  }
+
+  .history-chip {
+    padding: 8px 14px;
+    font-size: 0.8rem;
   }
 }
