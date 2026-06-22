@@ -7,7 +7,7 @@ SolidJS v1.8 con Vite
 
 ```bash
 npm install
-cp .env.example .env
+copy .env.example .env
 # Editar .env y pegar tu API Key de OpenWeatherMap
 npm run dev
 ```
@@ -19,7 +19,7 @@ npm run dev
 
 ## Conceptos clave de SolidJS
 - `createSignal`: estado reactivo primitivo (equivalente a useState en React)
-- `createStore`: estado reactivo para objetos complejos
+- `createResource`: fetching de datos asíncrono con estados loading/error automáticos
 - `Show`: renderizado condicional declarativo
 - `For`: renderizado de listas reactivas
 - Sin Virtual DOM: SolidJS actualiza el DOM real directamente
@@ -37,7 +37,18 @@ npm run dev
 **Contras:** Ecosistema más pequeño, curva de aprendizaje en reactividad fina
 
 ## Demo
-URL: https://investigacion-g5-weather-solidjs.vercel.app/
+URL: https://investigacion-g5-weather-solid-js.vercel.app/
 
 ## Capturas
-<!-- agregar capturas de pantalla aquí -->
+
+### Vista principal — ciudad por defecto (Liberia)
+![Vista principal con clima de Liberia](Capturas_Evidencia/image.png)
+
+### Búsqueda con historial de ciudades recientes
+![Historial de ciudades buscadas y resultado de Managua](Capturas_Evidencia/image1.png)
+
+### Vista de Error al buscar una ciudad no existente
+![Vista de error al buscar ciudad que no existe](Capturas_Evidencia/image3.png)
+
+### Vista de Error al perder conexión
+![Vista al error de conexión](Capturas_Evidencia/image4.png)

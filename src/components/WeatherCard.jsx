@@ -1,4 +1,4 @@
-import { Show } from "solid-js";
+import { Switch, Match } from "solid-js";
 import { weather } from "../store/weatherStore";
 import "../styles/components/WeatherCard.css";
 
@@ -24,170 +24,151 @@ const getHumidityText = (humidity) => {
   return "Baja";
 };
 
-const formatTime = (timestamp) =>
-  new Date(timestamp * 1000).toLocaleTimeString("es-CR", {
+const formatTime = (timestamp) => {
+  if (!timestamp) return "N/D";
+  return new Date(timestamp * 1000).toLocaleTimeString("es-CR", {
     hour: "2-digit",
     minute: "2-digit",
   });
+};
 
 export default function WeatherCard() {
   return (
     <div class="weather-wrapper">
-      <Show when={weather.loading}>
-        <div class="status-message loading-message">
-          <div class="spinner" />
-        </div>
-      </Show>
+      <Switch>
 
-      <Show when={weather.error}>
-        <div class="status-message error-message">
-          {weather.error?.message ?? "Error al conectar con el servidor."}
-        </div>
-      </Show>
+        <Match when={weather.loading}>
+          <div class="status-message loading-message">
+            <div class="spinner" />
+          </div>
+        </Match>
 
-      <Show when={weather()} keyed>
-        {(data) => {
-          const description = capitalize(data.weather[0].description);
+        <Match when={weather.error}>
+          <div class="status-message error-message">
+            ⚠️ {weather.error?.message || "Fallo de red: Verifica tu conexión a internet."}
+          </div>
+        </Match>
 
-          return (
-            <div class="weather-layout">
-              <section class="weather-hero">
-                <div class="weather-hero-info">
-                  <span class="weather-location">{data.sys.country}</span>
+        <Match when={weather()} keyed>
+          {(data) => {
+            const description = capitalize(data.weather[0].description);
 
-                  <h2 class="weather-city">{data.name}</h2>
+            return (
+              <div class="weather-layout">
+                <section class="weather-hero">
+                  <div class="weather-hero-info">
+                    <span class="weather-location">{data.sys.country}</span>
 
-                  <div class="weather-temp-block">
-                    <span class="weather-temp">
-                      {Math.round(data.main.temp)}
-                    </span>
-                    <span class="weather-temp-unit">°C</span>
-                  </div>
+                    <h2 class="weather-city">{data.name}</h2>
 
-                  <div class="weather-meta">
-                    <span class="weather-badge">{description}</span>
-                    <span class="weather-feels">
-                      Sensación {Math.round(data.main.feels_like)}°C
-                    </span>
-                  </div>
-                </div>
+                    <div class="weather-temp-block">
+                      <span class="weather-temp">
+                        {Math.round(data.main.temp)}
+                      </span>
+                      <span class="weather-temp-unit">°C</span>
+                    </div>
 
-                <div class="weather-hero-icon">
-                  <img
-                    class="weather-icon"
-                    src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`}
-                    alt={description}
-                  />
-
-                  <span class="weather-icon-label">{description}</span>
-                </div>
-              </section>
-
-              <section class="weather-secondary">
-                <article class="secondary-card">
-                  <h2 class="details-title">
-                    <i class="fa-solid fa-sun"></i>
-                    Información solar
-                  </h2>
-
-                  <div class="secondary-item">
-                    <i class="fa-solid fa-sun"></i>
-                    <div>
-                      <span>Amanecer</span>
-                      <strong>{formatTime(data.sys.sunrise)}</strong>
+                    <div class="weather-meta">
+                      <span class="weather-badge">{description}</span>
+                      <span class="weather-feels">
+                        Sensación {Math.round(data.main.feels_like)}°C
+                      </span>
                     </div>
                   </div>
 
-                  <div class="secondary-item">
-                    <i class="fa-solid fa-moon"></i>
-                    <div>
-                      <span>Atardecer</span>
-                      <strong>{formatTime(data.sys.sunset)}</strong>
-                    </div>
+                  <div class="weather-hero-icon">
+                    <img
+                      class="weather-icon"
+                      src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`}
+                      alt={description}
+                    />
+                    <span class="weather-icon-label">{description}</span>
                   </div>
-                </article>
+                </section>
 
-                <article class="secondary-card">
-                  <h2 class="details-title">
-                    <i class="fa-solid fa-temperature-half"></i>
-                    Temperatura
-                  </h2>
-
-                  <div class="secondary-item">
-                    <i class="fa-solid fa-temperature-half"></i>
-                    <div>
-                      <span>Sensación térmica</span>
-                      <strong>{Math.round(data.main.feels_like)}°</strong>
+                <section class="weather-secondary">
+                  <article class="secondary-card">
+                    <h2 class="details-title">
+                      <i class="fa-solid fa-sun"></i>
+                      Información solar
+                    </h2>
+                    <div class="secondary-item">
+                      <i class="fa-solid fa-sun"></i>
+                      <div>
+                        <span>Amanecer</span>
+                        <strong>{formatTime(data.sys.sunrise)}</strong>
+                      </div>
                     </div>
-                  </div>
-
-                  <div class="secondary-item">
-                    <i class="fa-solid fa-fire"></i>
-                    <div>
-                      <span>Máxima</span>
-                      <strong>{Math.round(data.main.temp_max)}°</strong>
+                    <div class="secondary-item">
+                      <i class="fa-solid fa-moon"></i>
+                      <div>
+                        <span>Atardecer</span>
+                        <strong>{formatTime(data.sys.sunset)}</strong>
+                      </div>
                     </div>
-                  </div>
+                  </article>
 
-                  <div class="secondary-item">
-                    <i class="fa-solid fa-snowflake"></i>
-                    <div>
-                      <span>Mínima</span>
-                      <strong>{Math.round(data.main.temp_min)}°</strong>
+                  <article class="secondary-card">
+                    <h2 class="details-title">
+                      <i class="fa-solid fa-temperature-half"></i>
+                      Temperatura
+                    </h2>
+                    <div class="secondary-item">
+                      <i class="fa-solid fa-temperature-half"></i>
+                      <div>
+                        <span>Sensación térmica</span>
+                        <strong>{Math.round(data.main.feels_like)}°</strong>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              </section>
+                    <div class="secondary-item">
+                      <i class="fa-solid fa-fire"></i>
+                      <div>
+                        <span>Máxima</span>
+                        <strong>{Math.round(data.main.temp_max)}°</strong>
+                      </div>
+                    </div>
+                    <div class="secondary-item">
+                      <i class="fa-solid fa-snowflake"></i>
+                      <div>
+                        <span>Mínima</span>
+                        <strong>{Math.round(data.main.temp_min)}°</strong>
+                      </div>
+                    </div>
+                  </article>
+                </section>
 
-              <section class="weather-details">
-                <article class="weather-detail">
-                  <span class="detail-icon">
-                    <i class="fa-solid fa-droplet"></i>
-                  </span>
-                  <span class="detail-label">Humedad</span>
-                  <span class="detail-value">{data.main.humidity}%</span>
-                  <span class="detail-unit">
-                    {getHumidityText(data.main.humidity)}
-                  </span>
-                </article>
+                <section class="weather-details">
+                  <article class="weather-detail">
+                    <span class="detail-icon"><i class="fa-solid fa-droplet"></i></span>
+                    <span class="detail-label">Humedad</span>
+                    <span class="detail-value">{data.main.humidity}%</span>
+                    <span class="detail-unit">{getHumidityText(data.main.humidity)}</span>
+                  </article>
+                  <article class="weather-detail">
+                    <span class="detail-icon"><i class="fa-solid fa-wind"></i></span>
+                    <span class="detail-label">Viento</span>
+                    <span class="detail-value">{formatWind(data.wind.speed)}</span>
+                    <span class="detail-unit">km/h</span>
+                  </article>
+                  <article class="weather-detail">
+                    <span class="detail-icon"><i class="fa-solid fa-eye"></i></span>
+                    <span class="detail-label">Visibilidad</span>
+                    <span class="detail-value">{formatVisibility(data.visibility)}</span>
+                    <span class="detail-unit">km</span>
+                  </article>
+                  <article class="weather-detail">
+                    <span class="detail-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                    <span class="detail-label">Presión</span>
+                    <span class="detail-value">{data.main.pressure}</span>
+                    <span class="detail-unit">mb</span>
+                  </article>
+                </section>
+              </div>
+            );
+          }}
+        </Match>
 
-                <article class="weather-detail">
-                  <span class="detail-icon">
-                    <i class="fa-solid fa-wind"></i>
-                  </span>
-                  <span class="detail-label">Viento</span>
-                  <span class="detail-value">
-                    {formatWind(data.wind.speed)}
-                  </span>
-                  <span class="detail-unit">km/h</span>
-                </article>
-
-                <article class="weather-detail">
-                  <span class="detail-icon">
-                    <i class="fa-solid fa-eye"></i>
-                  </span>
-                  <span class="detail-label">Visibilidad</span>
-                  <span class="detail-value">
-                    {formatVisibility(data.visibility)}
-                  </span>
-                  <span class="detail-unit">km</span>
-                </article>
-
-                <article class="weather-detail">
-                  <span class="detail-icon">
-                    <i class="fa-solid fa-gauge-high"></i>
-                  </span>
-                  <span class="detail-label">Presión</span>
-                  <span class="detail-value">{data.main.pressure}</span>
-                  <span class="detail-unit">mb</span>
-                </article>
-              </section>
-
-             
-            </div>
-          );
-        }}
-      </Show>
+      </Switch>
     </div>
   );
 }
