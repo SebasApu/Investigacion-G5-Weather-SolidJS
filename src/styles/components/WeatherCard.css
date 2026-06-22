@@ -6,6 +6,7 @@
 .weather-layout {
   position: relative;
   width: 100%;
+  color: #f8fafc;
 }
 
 .weather-hero,
@@ -34,7 +35,7 @@
 }
 
 .weather-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 230px;
   height: 230px;
@@ -46,7 +47,7 @@
 }
 
 .weather-hero::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 180px;
   height: 180px;
@@ -184,6 +185,50 @@
   margin-top: 14px;
 }
 
+.weather-extra-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.details-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.fa-fire {
+  color: #ff6b35;
+}
+.fa-snowflake {
+  color: #4cc9f0;
+}
+.fa-sun {
+  color: #ffb703;
+}
+.fa-moon {
+  color: #d6d6ff;
+}
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.detail-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
 .weather-detail {
   min-height: 128px;
   display: flex;
@@ -208,14 +253,18 @@
 }
 
 .detail-icon {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  margin-bottom: 8px;
-  border-radius: 16px;
-  font-size: 1.38rem;
-  background: rgba(255, 255, 255, 0.07);
+  font-size: 1.6rem;
+}
+
+.detail-name {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: #cbd5e1;
+}
+
+.detail-data {
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .humidity .detail-icon {
@@ -313,10 +362,6 @@
 
   .weather-details {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .weather-scroll-button {
-    display: none;
   }
 }
 

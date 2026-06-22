@@ -5,8 +5,8 @@
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #0d1117;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #0b1120 0%, #112240 45%, #1e3a5f 100%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@ body {
 }
 
 .app-title {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
   text-align: center;
   font-size: 0.75rem;
   font-weight: 400;

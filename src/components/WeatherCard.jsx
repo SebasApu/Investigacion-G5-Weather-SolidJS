@@ -29,6 +29,20 @@ export default function WeatherCard() {
     return "Baja";
   };
 
+  const sunrise = (timestamp) => {
+  return new Date(timestamp * 1000).toLocaleTimeString("es-CR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
+const sunset = (timestamp) => {
+  return new Date(timestamp * 1000).toLocaleTimeString("es-CR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
   return (
     <div class="weather-wrapper">
       <Show when={weather.loading}>
@@ -125,6 +139,56 @@ export default function WeatherCard() {
                   <span class="detail-value">{data().main.pressure}</span>
                   <span class="detail-unit">mb</span>
                 </article>
+              </section>
+
+              <section class="weather-extra-details">
+                <h2 class="details-title">Información solar</h2>
+
+                <div class="details-grid">
+                  <article class="detail-card">
+                    <i class="fa-solid fa-sun detail-icon"></i>
+                    <span class="detail-name">Amanecer</span>
+                    <span class="detail-data">
+  {sunrise(data().sys.sunrise)}
+</span>
+                  </article>
+
+                  <article class="detail-card">
+                    <i class="fa-solid fa-moon detail-icon"></i>
+                    <span class="detail-name">Atardecer</span>
+                    <span class="detail-data">
+  {sunset(data().sys.sunset)}
+</span>
+                  </article>
+                </div>
+
+                <h2 class="details-title">Temperatura</h2>
+
+                <div class="details-grid">
+                  <article class="detail-card">
+                    <i class="fa-solid fa-temperature-half detail-icon"></i>
+                    <span class="detail-name">Sensación térmica</span>
+                    <span class="detail-data">
+                      {Math.round(data().main.feels_like)}°
+                    </span>
+                  </article>
+
+                  <article class="detail-card">
+                    <i class="fa-solid fa-fire detail-icon"></i>
+                    <span class="detail-name">Máxima</span>
+                    <span class="detail-data">
+                      {Math.round(data().main.temp_max)}°
+                    </span>
+                  </article>
+
+                  <article class="detail-card">
+                    <i class="fa-solid fa-snowflake detail-icon"></i>
+                    <span class="detail-name">Mínima</span>
+                    <span class="detail-data">
+                      {Math.round(data().main.temp_min)}°
+                    </span>
+                  </article>
+                </div>
               </section>
             </div>
           );
