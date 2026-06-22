@@ -1,7 +1,6 @@
 import SearchBar from './components/SearchBar';
 import SearchHistory from './components/SearchHistory';
 import WeatherCard from './components/WeatherCard';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function App() {
   return (
