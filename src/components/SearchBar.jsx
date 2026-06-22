@@ -15,7 +15,6 @@ export default function SearchBar() {
 
   return (
     <div class="search-bar">
-      <span class="search-icon">🔍</span>
       <input
         type="text"
         placeholder="Buscar ciudad..."

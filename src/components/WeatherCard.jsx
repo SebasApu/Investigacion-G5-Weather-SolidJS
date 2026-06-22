@@ -1,4 +1,5 @@
 import { Switch, Match } from "solid-js";
+import { Sun, Moon, Thermometer, Flame, Snowflake, Droplets, Wind, Eye, Gauge } from "lucide-solid";
 import { weather } from "../store/weatherStore";
 import "../styles/components/WeatherCard.css";
 
@@ -89,18 +90,18 @@ export default function WeatherCard() {
                 <section class="weather-secondary">
                   <article class="secondary-card">
                     <h2 class="details-title">
-                      <i class="fa-solid fa-sun"></i>
+                      <Sun size={16} />
                       Información solar
                     </h2>
                     <div class="secondary-item">
-                      <i class="fa-solid fa-sun"></i>
+                      <Sun size={18} />
                       <div>
                         <span>Amanecer</span>
                         <strong>{formatTime(data.sys.sunrise)}</strong>
                       </div>
                     </div>
                     <div class="secondary-item">
-                      <i class="fa-solid fa-moon"></i>
+                      <Moon size={18} />
                       <div>
                         <span>Atardecer</span>
                         <strong>{formatTime(data.sys.sunset)}</strong>
@@ -110,25 +111,25 @@ export default function WeatherCard() {
 
                   <article class="secondary-card">
                     <h2 class="details-title">
-                      <i class="fa-solid fa-temperature-half"></i>
+                      <Thermometer size={16} />
                       Temperatura
                     </h2>
                     <div class="secondary-item">
-                      <i class="fa-solid fa-temperature-half"></i>
+                      <Thermometer size={18} />
                       <div>
                         <span>Sensación térmica</span>
                         <strong>{Math.round(data.main.feels_like)}°</strong>
                       </div>
                     </div>
                     <div class="secondary-item">
-                      <i class="fa-solid fa-fire"></i>
+                      <Flame size={18} />
                       <div>
                         <span>Máxima</span>
                         <strong>{Math.round(data.main.temp_max)}°</strong>
                       </div>
                     </div>
                     <div class="secondary-item">
-                      <i class="fa-solid fa-snowflake"></i>
+                      <Snowflake size={18} />
                       <div>
                         <span>Mínima</span>
                         <strong>{Math.round(data.main.temp_min)}°</strong>
@@ -139,25 +140,25 @@ export default function WeatherCard() {
 
                 <section class="weather-details">
                   <article class="weather-detail">
-                    <span class="detail-icon"><i class="fa-solid fa-droplet"></i></span>
+                    <span class="detail-icon"><Droplets size={20} /></span>
                     <span class="detail-label">Humedad</span>
                     <span class="detail-value">{data.main.humidity}%</span>
                     <span class="detail-unit">{getHumidityText(data.main.humidity)}</span>
                   </article>
                   <article class="weather-detail">
-                    <span class="detail-icon"><i class="fa-solid fa-wind"></i></span>
+                    <span class="detail-icon"><Wind size={20} /></span>
                     <span class="detail-label">Viento</span>
                     <span class="detail-value">{formatWind(data.wind.speed)}</span>
                     <span class="detail-unit">km/h</span>
                   </article>
                   <article class="weather-detail">
-                    <span class="detail-icon"><i class="fa-solid fa-eye"></i></span>
+                    <span class="detail-icon"><Eye size={20} /></span>
                     <span class="detail-label">Visibilidad</span>
                     <span class="detail-value">{formatVisibility(data.visibility)}</span>
                     <span class="detail-unit">km</span>
                   </article>
                   <article class="weather-detail">
-                    <span class="detail-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                    <span class="detail-icon"><Gauge size={20} /></span>
                     <span class="detail-label">Presión</span>
                     <span class="detail-value">{data.main.pressure}</span>
                     <span class="detail-unit">mb</span>
