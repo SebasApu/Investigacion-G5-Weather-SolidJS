@@ -23,12 +23,23 @@ body {
 }
 
 .app-title {
-  color: rgba(255, 255, 255, 0.4);
+  position: relative;
+  width: fit-content;
+  margin: 0 auto 0.25rem;
+  padding: 0.35rem 0.9rem;
+  color: #f8fbff;
   text-align: center;
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 4px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
 }
 
 .error-message {
